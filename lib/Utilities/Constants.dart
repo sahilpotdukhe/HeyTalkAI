@@ -30,6 +30,7 @@ final chatMessages = [
   },
 ];
 
+/*
 List<String> models = [
   'Model1',
   'Model2',
@@ -49,3 +50,5 @@ List<DropdownMenuItem<String>>? get getModelItems {
               value: models[index], child: Text(models[index])));
   return modelItems;
 }
+
+ */

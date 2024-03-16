@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:heytalkai/Services/ApiService.dart';
 import 'package:heytalkai/Services/Services.dart';
 import 'package:heytalkai/Utilities/Constants.dart';
 import 'package:heytalkai/Widgets/ChatWidgets.dart';
@@ -72,7 +73,12 @@ class _ChatScreenState extends State<ChatScreen> {
                     ),
                     suffixIcon: IconButton(
                       icon: Icon(Icons.send),
-                      onPressed: () {
+                      onPressed: () async{
+                        try{
+                          await ApiService.getModelsFromAPI();
+                        }catch(e){
+                          print(e);
+                        }
                         print("Hello");
                       },
                       color: Colors.white,
