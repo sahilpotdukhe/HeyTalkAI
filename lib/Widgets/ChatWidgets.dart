@@ -1,3 +1,4 @@
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 
 class ChatWidget extends StatefulWidget {
@@ -31,9 +32,17 @@ class _ChatWidgetState extends State<ChatWidget> {
           ),
           Expanded(
               child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Text(widget.message),
-          )),
+                padding:  EdgeInsets.fromLTRB(8,10,8,18),
+                child: (widget.index == 0)
+                    ? Text(widget.message)
+                    : AnimatedTextKit(
+                        animatedTexts: [TypewriterAnimatedText(widget.message.trim())],
+                        isRepeatingAnimation: false,
+                        displayFullTextOnTap: true,
+                        repeatForever: false,
+                        totalRepeatCount: 1,
+                                      ),
+              )),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: (widget.index == 0)

@@ -1,7 +1,9 @@
 import 'dart:convert';
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:heytalkai/Models/APIModelsModel.dart';
+import 'package:heytalkai/Models/ChatModel.dart';
 import 'package:heytalkai/Utilities/APIConstants.dart';
 import 'package:http/http.dart' as http;
 
@@ -23,6 +25,44 @@ class ApiService {
       }
       // print("Json Response:\n $jsonResponse");
       return APIModelsModel.modelFromSnapshot(jsonResponseDataList);
+    } catch (e) {
+      print("error: $e");
+      rethrow;
+    }
+  }
+
+  static Future<List<ChatModel>> sendMessageToAPI(
+      {required String message, required String modelName}) async {
+    try {
+      var response = await http.post(
+          Uri.parse("https://api.openai.com/v1/chat/completions"),
+          headers: {
+            'Authorization': 'Bearer $OPENAI_API_KEY',
+            'Content-Type': 'application/json'
+          },
+          body: jsonEncode({
+            "model": modelName,
+            "messages": [
+              {"role": "user", "content": message}
+            ]
+          }));
+      Map jsonResponse = jsonDecode(response.body);
+      if (jsonResponse['error'] != null) {
+        // print("jsonResponseError: ${jsonResponse['error']['message']}");
+        throw HttpException(jsonResponse['error']['message']);
+      }
+
+      List<ChatModel> chatList = [];
+      if (jsonResponse['choices'].length > 0) {
+        // log("Response: ${jsonResponse['choices'][0]['message']['content']}");
+        chatList = List.generate(
+            jsonResponse['choices'].length,
+            (index) => ChatModel(
+                content: jsonResponse['choices'][index]['message']['content'],
+                chatIndex: 1 // 1 for chatBot response
+                ));
+      }
+      return chatList;
     } catch (e) {
       print("error: $e");
       rethrow;
