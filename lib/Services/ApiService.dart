@@ -98,6 +98,38 @@ class ApiService {
       print("RRRR $e");
       rethrow;
     }
+  }
 
+  static Future<String> translateMessageFromAPI(
+      {required String message, required String modelName}) async {
+    try {
+      var response = await http.post(
+          Uri.parse("https://api.openai.com/v1/chat/completions"),
+          headers: {
+            'Authorization': 'Bearer $OPENAI_API_KEY',
+            'Content-Type': 'application/json'
+          },
+          body: jsonEncode({
+            "model": modelName,
+            "messages": [
+              {"role": "user", "content": message}
+            ]
+          }));
+      Map jsonResponse = jsonDecode(response.body);
+      if (jsonResponse['error'] != null) {
+        // print("jsonResponseError: ${jsonResponse['error']['message']}");
+        throw HttpException(jsonResponse['error']['message']);
+      }
+
+      String translatedText = "";
+      if (jsonResponse['choices'].length > 0) {
+        translatedText = jsonResponse['choices'][0]['message']['content'];
+        log("Response: ${jsonResponse['choices'][0]['message']['content']}");
+      }
+      return translatedText;
+    } catch (e) {
+      print("error: $e");
+      rethrow;
+    }
   }
 }
