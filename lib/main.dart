@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:heytalkai/Provider/ChatProvider.dart';
 import 'package:heytalkai/Provider/ModelsProvider.dart';
-import 'package:heytalkai/Screens/ChatScreen.dart';
 import 'package:provider/provider.dart';
+import 'package:heytalkai/Screens/ImageGenerationScreen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
           useMaterial3: true,
         ),
-        home: ChatScreen(),
+        home: ImageGenerationScreen()
       ),
     );
   }

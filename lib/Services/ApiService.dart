@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
 
+import 'package:flutter/cupertino.dart';
 import 'package:heytalkai/Models/APIModelsModel.dart';
 import 'package:heytalkai/Models/ChatModel.dart';
 import 'package:heytalkai/Utilities/APIConstants.dart';
@@ -67,5 +68,36 @@ class ApiService {
       print("error: $e");
       rethrow;
     }
+  }
+
+  static Future<String> generateImage({required String userPrompt}) async{
+    String imageUrl = "";
+    try{
+      var response = await http.post(
+          Uri.parse("https://api.openai.com/v1/images/generations"),
+          headers: {
+            'Authorization': 'Bearer $OPENAI_API_KEY',
+            'Content-Type': 'application/json'
+          },
+          body: jsonEncode({
+              "model": "dall-e-2",
+              "prompt": userPrompt,
+              "n": 1,
+              "size": "1024x1024"
+          }));
+      Map jsonResponse = jsonDecode(response.body);
+      if (jsonResponse['error'] != null) {
+        // print("jsonResponseError: ${jsonResponse['error']['message']}");
+        throw HttpException(jsonResponse['error']['message']);
+      }
+
+      imageUrl = jsonResponse['data'][0]['url'];
+      print(imageUrl);
+      return imageUrl;
+    }catch(e){
+      print("RRRR $e");
+      rethrow;
+    }
+
   }
 }
