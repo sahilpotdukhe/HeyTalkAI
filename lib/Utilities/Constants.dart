@@ -1,8 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:hexcolor/hexcolor.dart';
 
 Color scaffoldBackgroundColor = const Color(0xFF343541);
 Color cardColor = const Color(0xFF444654);
-
+class AppColors{
+  static final Color appThemeColor = HexColor('02CE63');
+  // static final Gradient appGradient = LinearGradient(
+  //     colors: [colour1, color2],
+  //     begin: Alignment.topLeft,
+  //     end: Alignment.bottomRight);
+}
 /*
 final chatMessages = [
   {

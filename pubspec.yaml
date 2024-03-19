@@ -35,6 +35,12 @@ dependencies:
   http: 1.2.0
   animated_text_kit: ^4.2.2
   hexcolor: ^3.0.1
+  google_fonts: 6.1.0
+  lottie: ^3.1.0
+  shared_preferences:
+  gallery_saver_updated: ^3.0.0
+  path_provider: ^2.1.2
+  share_plus: ^7.2.2
 
 
   # The following adds the Cupertino Icons font to your application.

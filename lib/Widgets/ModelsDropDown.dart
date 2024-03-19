@@ -25,13 +25,13 @@ class _ModelsDropDownState extends State<ModelsDropDown> {
             return Text(snapshot.error.toString());
           }
           return (snapshot.data == null || snapshot.data!.isEmpty)
-              ? Text('Loading models...')
+              ? Text('Loading models...',style: TextStyle(color: Colors.green,fontSize: 16),)
               : DropdownButton(
                   items: List<DropdownMenuItem<String>>.generate(
                       snapshot.data!.length,
                       (index) => DropdownMenuItem(
                           value: snapshot.data![index].id,
-                          child: Text(snapshot.data![index].id))),
+                          child: Text(snapshot.data![index].id,style: TextStyle(fontSize: 16),))),
                   value: currentModel,
                   iconEnabledColor: Colors.black,
                   onChanged: (value) {

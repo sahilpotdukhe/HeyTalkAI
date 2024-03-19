@@ -9,7 +9,7 @@ class Services{
         shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.vertical(
                 top: Radius.circular(20)
-            )
+            ),
         ),
         context: context,
         builder:(context) {
@@ -18,7 +18,7 @@ class Services{
             children:const [
               Padding(
                 padding:  EdgeInsets.all(18.0),
-                child: Text('Chosen Model'),
+                child: Text('Chosen Model',style: TextStyle(fontSize: 16),),
               ),
               Flexible(child: ModelsDropDown())
             ],

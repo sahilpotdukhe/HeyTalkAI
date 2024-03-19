@@ -2,7 +2,6 @@ import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
 
-import 'package:flutter/cupertino.dart';
 import 'package:heytalkai/Models/APIModelsModel.dart';
 import 'package:heytalkai/Models/ChatModel.dart';
 import 'package:heytalkai/Utilities/APIConstants.dart';

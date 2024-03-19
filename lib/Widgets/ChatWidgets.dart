@@ -1,5 +1,7 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
+import 'package:heytalkai/Utilities/Constants.dart';
+import 'package:lottie/lottie.dart';
 
 class ChatWidget extends StatefulWidget {
   final String message;
@@ -14,48 +16,96 @@ class ChatWidget extends StatefulWidget {
 class _ChatWidgetState extends State<ChatWidget> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: (widget.index == 0) ? Colors.blue : Colors.white,
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Padding(
-            padding: EdgeInsets.all(8.0),
-            child: CircleAvatar(
-              backgroundImage: (widget.index == 0)
-                  ? AssetImage('assets/user.jpg')
-                  : AssetImage('assets/chat_logo.png'),
+    return (widget.index == 0) ? senderLayout() : receiverLayout();
+  }
+
+  Widget senderLayout() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.end,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Column(
+          children: [
+            SizedBox(
+              height: 20,
             ),
-          ),
-          SizedBox(
-            width: 10,
-          ),
-          Expanded(
+            Container(
+              constraints: BoxConstraints(
+                  maxWidth: MediaQuery.of(context).size.width * 0.6),
+              decoration: BoxDecoration(
+                  color: AppColors.appThemeColor,
+                  borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(5),
+                      bottomLeft: Radius.circular(5),
+                      bottomRight: Radius.circular(15))),
               child: Padding(
-                padding:  EdgeInsets.fromLTRB(8,10,8,18),
-                child: (widget.index == 0)
-                    ? Text(widget.message)
-                    : AnimatedTextKit(
-                        animatedTexts: [TypewriterAnimatedText(widget.message.trim())],
-                        isRepeatingAnimation: false,
-                        displayFullTextOnTap: true,
-                        repeatForever: false,
-                        totalRepeatCount: 1,
-                                      ),
-              )),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: (widget.index == 0)
-                ? Container()
-                : Row(
-                    children: const [
-                      Icon(Icons.thumb_up_alt_outlined),
-                      Icon(Icons.thumb_down_alt_outlined)
-                    ],
-                  ),
-          )
-        ],
-      ),
+                  padding: EdgeInsets.fromLTRB(8, 10, 8, 10),
+                  child: Text(
+                    widget.message,
+                    style: TextStyle(fontSize: 16, color: Colors.white),
+                  )),
+            ),
+          ],
+        ),
+        Padding(
+            padding: EdgeInsets.all(8.0),
+            child: Container(
+                height: 50,
+                width: 50,
+                decoration:
+                    BoxDecoration(color: Colors.white, shape: BoxShape.circle),
+                child: Image.asset(
+                  'assets/userbg.png',
+                  fit: BoxFit.cover,
+                ))),
+      ],
+    );
+  }
+
+  Widget receiverLayout() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+            padding: EdgeInsets.all(8.0),
+            child: Container(
+              height: 50,
+              width: 50,
+              decoration:
+                  BoxDecoration(color: Colors.white, shape: BoxShape.circle),
+              child: Lottie.asset('assets/chattingavatarbot.json'),
+            )),
+        Column(
+          children: [
+            SizedBox(
+              height: 20,
+            ),
+            Container(
+              constraints: BoxConstraints(
+                  maxWidth: MediaQuery.of(context).size.width * 0.7),
+              decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.only(
+                      topRight: Radius.circular(5),
+                      bottomRight: Radius.circular(5),
+                      bottomLeft: Radius.circular(15))),
+              child: Padding(
+                padding: EdgeInsets.fromLTRB(8, 10, 8, 10),
+                child: AnimatedTextKit(
+                  animatedTexts: [
+                    TypewriterAnimatedText(widget.message.trim())
+                  ],
+                  isRepeatingAnimation: false,
+                  displayFullTextOnTap: true,
+                  repeatForever: false,
+                  totalRepeatCount: 1,
+                ),
+              ),
+            ),
+          ],
+        ),
+      ],
     );
   }
 }
