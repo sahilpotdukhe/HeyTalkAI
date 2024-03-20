@@ -1,4 +1,3 @@
-import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:heytalkai/Utilities/Constants.dart';
 import 'package:lottie/lottie.dart';
@@ -92,15 +91,17 @@ class _ChatWidgetState extends State<ChatWidget> {
                       bottomLeft: Radius.circular(15))),
               child: Padding(
                 padding: EdgeInsets.fromLTRB(8, 10, 8, 10),
-                child: AnimatedTextKit(
-                  animatedTexts: [
-                    TypewriterAnimatedText(widget.message.trim())
-                  ],
-                  isRepeatingAnimation: false,
-                  displayFullTextOnTap: true,
-                  repeatForever: false,
-                  totalRepeatCount: 1,
-                ),
+                child:Text(widget.message)
+                //TypeWriterText(text: Text(widget.message), duration: Duration(milliseconds: 10),maintainSize: false,repeat: false,)
+                // AnimatedTextKit(
+                //   animatedTexts: [
+                //     TypewriterAnimatedText(widget.message.trim(),speed: const Duration(milliseconds: 20),),
+                //   ],
+                //   isRepeatingAnimation: false,
+                //   displayFullTextOnTap: true,
+                //   repeatForever: false,
+                //   totalRepeatCount: 0,
+                // ),
               ),
             ),
           ],

@@ -1,6 +1,5 @@
 import 'dart:developer';
 
-import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:heytalkai/Provider/ChatProvider.dart';
@@ -54,15 +53,18 @@ class _ChatScreenState extends State<ChatScreen> {
       ),
       body: Container(
         color: Colors.black,
-        child: Column(children: [
+        child: Column(
+            children: [
           Flexible(
             child: ListView.builder(
+                reverse: true,
                 controller: _scrollController,
                 itemCount: chatProvider.getChatList.length,
                 itemBuilder: (context, index) {
+                  final reversedIndex = chatProvider.getChatList.length - 1 - index;
                   return ChatWidget(
-                    message: chatProvider.getChatList[index].content,
-                    index: chatProvider.getChatList[index].chatIndex,
+                    message: chatProvider.getChatList[reversedIndex].content,
+                    index: chatProvider.getChatList[reversedIndex].chatIndex,
                   );
                 }),
           ),
@@ -96,15 +98,16 @@ class _ChatScreenState extends State<ChatScreen> {
                             bottomLeft: Radius.circular(15))),
                     child: Padding(
                       padding: EdgeInsets.fromLTRB(8, 10, 8, 10),
-                      child: AnimatedTextKit(
-                        animatedTexts: [
-                          TypewriterAnimatedText("Please wait...")
-                        ],
-                        isRepeatingAnimation: false,
-                        displayFullTextOnTap: true,
-                        repeatForever: false,
-                        totalRepeatCount: 1,
-                      ),
+                      child:Text('Please wait...')
+                      // AnimatedTextKit(
+                      //   animatedTexts: [
+                      //     TypewriterAnimatedText("Please wait...")
+                      //   ],
+                      //   isRepeatingAnimation: false,
+                      //   displayFullTextOnTap: true,
+                      //   repeatForever: false,
+                      //   totalRepeatCount: 1,
+                      // ),
                     ),
                   ),
                 ],
@@ -193,9 +196,9 @@ class _ChatScreenState extends State<ChatScreen> {
       setState(() {
         isTyping = false;
       });
-      Future.delayed(Duration(seconds: 1), () {
-        _scrollController.jumpTo(_scrollController.position.maxScrollExtent);
-      });
+      // await Future.delayed(Duration(seconds: 2), () {
+      //   _scrollController.jumpTo(_scrollController.position.maxScrollExtent);
+      // });
     }
   }
 }
