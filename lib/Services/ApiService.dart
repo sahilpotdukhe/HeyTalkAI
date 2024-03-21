@@ -55,12 +55,20 @@ class ApiService {
       List<ChatModel> chatList = [];
       if (jsonResponse['choices'].length > 0) {
         // log("Response: ${jsonResponse['choices'][0]['message']['content']}");
+
         chatList = List.generate(
             jsonResponse['choices'].length,
-            (index) => ChatModel(
-                content: jsonResponse['choices'][index]['message']['content'],
-                chatIndex: 1 // 1 for chatBot response
-                ));
+            (index){
+              String translatedText = "";
+              String contentResponse = jsonResponse['choices'][index]['message']['content'];
+              translatedText = utf8.decode(contentResponse.codeUnits);
+              return ChatModel(
+                  content: translatedText,
+                  chatIndex: 1 // 1 for chatBot response
+              );
+            }
+
+        );
       }
       return chatList;
     } catch (e) {
