@@ -4,6 +4,7 @@ import 'package:heytalkai/Screens/ChatScreen.dart';
 import 'package:heytalkai/Screens/ImageGenerationScreen.dart';
 import 'package:heytalkai/Screens/LanguageTranslate.dart';
 import 'package:heytalkai/Utilities/Constants.dart';
+import 'package:heytalkai/Utilities/ScreenDimensions.dart';
 import 'package:lottie/lottie.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -11,6 +12,7 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    ScaleUtils.init(context);
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -31,12 +33,12 @@ class HomeScreen extends StatelessWidget {
               Navigator.push(context, MaterialPageRoute(builder: (context)=>ChatScreen()));
             },
             child: Padding(
-              padding: const EdgeInsets.fromLTRB(24, 20, 24, 10),
+              padding:  EdgeInsets.fromLTRB(24*ScaleUtils.horizontalScale, 20*ScaleUtils.verticalScale, 24*ScaleUtils.horizontalScale, 10*ScaleUtils.verticalScale),
               child: Container(
-                height: 150,
+                height: 140*ScaleUtils.verticalScale,
                 decoration: BoxDecoration(
                   color: Colors.black,
-                  borderRadius: BorderRadius.circular(20),
+                  borderRadius: BorderRadius.circular(20*ScaleUtils.scaleFactor),
                 ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -45,14 +47,14 @@ class HomeScreen extends StatelessWidget {
                     Container(
                         decoration: BoxDecoration(
                           color: AppColors.appThemeColor,
-                          borderRadius: BorderRadius.circular(20),
+                          borderRadius: BorderRadius.circular(17*ScaleUtils.scaleFactor),
                         ),
                         child: Padding(
-                          padding: const EdgeInsets.symmetric(
-                              vertical: 12.0, horizontal: 18),
+                          padding:  EdgeInsets.symmetric(
+                              vertical: 10.0*ScaleUtils.verticalScale, horizontal: 14*ScaleUtils.horizontalScale),
                           child: Text("AI ChatBot",
                               style:
-                                  TextStyle(fontSize: 18, color: Colors.white)),
+                                  TextStyle(fontSize: 16*ScaleUtils.scaleFactor, color: Colors.white)),
                         )),
                   ],
                 ),
@@ -64,12 +66,12 @@ class HomeScreen extends StatelessWidget {
               Navigator.push(context, MaterialPageRoute(builder: (context)=>ImageGenerationScreen()));
             },
             child: Padding(
-              padding: const EdgeInsets.fromLTRB(24, 20, 24, 10),
+              padding:  EdgeInsets.fromLTRB(24*ScaleUtils.horizontalScale, 20*ScaleUtils.verticalScale, 24*ScaleUtils.horizontalScale, 10*ScaleUtils.verticalScale),
               child: Container(
-                height: 150,
+                height: 140*ScaleUtils.verticalScale,
                 decoration: BoxDecoration(
                   color: Colors.black,
-                  borderRadius: BorderRadius.circular(20),
+                  borderRadius: BorderRadius.circular(20*ScaleUtils.scaleFactor),
                 ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -77,14 +79,14 @@ class HomeScreen extends StatelessWidget {
                     Container(
                         decoration: BoxDecoration(
                           color: AppColors.appThemeColor,
-                          borderRadius: BorderRadius.circular(20),
+                          borderRadius: BorderRadius.circular(17*ScaleUtils.scaleFactor),
                         ),
                         child: Padding(
-                          padding: const EdgeInsets.symmetric(
-                              vertical: 12.0, horizontal: 18),
+                          padding: EdgeInsets.symmetric(
+                              vertical: 10.0*ScaleUtils.verticalScale, horizontal: 14*ScaleUtils.horizontalScale),
                           child: Text("Generate Image",
                               style:
-                                  TextStyle(fontSize: 18, color: Colors.white)),
+                                  TextStyle(fontSize: 16*ScaleUtils.scaleFactor, color: Colors.white)),
                         )),
                     Lottie.asset('assets/image.json'),
                   ],
@@ -97,30 +99,30 @@ class HomeScreen extends StatelessWidget {
               Navigator.push(context, MaterialPageRoute(builder: (context)=>LanguageTranslate()));
             },
             child: Padding(
-              padding: const EdgeInsets.fromLTRB(24, 20, 24, 10),
+              padding:  EdgeInsets.fromLTRB(24*ScaleUtils.horizontalScale, 20*ScaleUtils.verticalScale, 24*ScaleUtils.horizontalScale, 10*ScaleUtils.verticalScale),
               child: Container(
-                height: 150,
+                height: 140*ScaleUtils.verticalScale,
                 decoration: BoxDecoration(
                   color: Colors.black,
-                  borderRadius: BorderRadius.circular(20),
+                  borderRadius: BorderRadius.circular(20*ScaleUtils.scaleFactor),
                 ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     SizedBox(
-                      height: 130,
+                      height: 130*ScaleUtils.verticalScale,
                         child: Lottie.asset('assets/languagetranslation.json')),
                     Container(
                         decoration: BoxDecoration(
                           color: AppColors.appThemeColor,
-                          borderRadius: BorderRadius.circular(20),
+                          borderRadius: BorderRadius.circular(17*ScaleUtils.scaleFactor),
                         ),
                         child: Padding(
-                          padding: const EdgeInsets.symmetric(
-                              vertical: 12.0, horizontal: 18),
+                          padding:  EdgeInsets.symmetric(
+                              vertical: 10.0*ScaleUtils.verticalScale, horizontal: 14*ScaleUtils.horizontalScale),
                           child: Text("Language Translator",
                               style:
-                                  TextStyle(fontSize: 18, color: Colors.white)),
+                                  TextStyle(fontSize: 16*ScaleUtils.scaleFactor, color: Colors.white)),
                         )),
                   ],
                 ),
@@ -128,16 +130,16 @@ class HomeScreen extends StatelessWidget {
             ),
           ),
           Padding(
-            padding: EdgeInsets.fromLTRB(20,20,20,0),
+            padding: EdgeInsets.fromLTRB(20*ScaleUtils.horizontalScale,20*ScaleUtils.verticalScale,20*ScaleUtils.horizontalScale,10*ScaleUtils.verticalScale),
             child: Container(
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20),
+                borderRadius: BorderRadius.circular(20*ScaleUtils.scaleFactor),
                 image: DecorationImage(
                   image: AssetImage('assets/AI.jpg'),
                   fit: BoxFit.fill,
                 ),
               ),
-              height: 250,
+              height: 220*ScaleUtils.verticalScale,
                 ),
           )
         ],

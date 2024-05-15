@@ -5,6 +5,7 @@ import 'package:gallery_saver_updated/gallery_saver.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:heytalkai/Services/ApiService.dart';
 import 'package:heytalkai/Utilities/Constants.dart';
+import 'package:heytalkai/Utilities/ScreenDimensions.dart';
 import 'package:http/http.dart';
 import 'package:lottie/lottie.dart';
 import 'package:path_provider/path_provider.dart';
@@ -24,6 +25,7 @@ class _ImageGenerationScreenState extends State<ImageGenerationScreen> {
 
   @override
   Widget build(BuildContext context) {
+    ScaleUtils.init(context);
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: AppBar(
@@ -38,19 +40,19 @@ class _ImageGenerationScreenState extends State<ImageGenerationScreen> {
       ),
       body: ListView(
         children: [
-          SizedBox(height: 10,),
+          SizedBox(height: 10*ScaleUtils.verticalScale,),
           Center(
               child: Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding:  EdgeInsets.all(8.0*ScaleUtils.scaleFactor),
             child: Text(
               "Please enter prompt to generate AI Image",
               style: TextStyle(
-                  fontSize: 18,
+                  fontSize: 17*ScaleUtils.scaleFactor,
                   color: Colors.white),
             ),
           )),
           Padding(
-              padding: const EdgeInsets.all(18.0),
+              padding: EdgeInsets.all(16.0*ScaleUtils.scaleFactor),
               child: TextField(
                 controller: imageTextController,
                 textAlign: TextAlign.center,
@@ -60,7 +62,7 @@ class _ImageGenerationScreenState extends State<ImageGenerationScreen> {
                 decoration: InputDecoration(
                   hintText: 'Type your prompt',
                   hintStyle: TextStyle(
-                    fontSize: 16,
+                    fontSize: 16*ScaleUtils.scaleFactor,
                     color: Colors.white,
                   ),
                   focusedBorder: OutlineInputBorder(
@@ -71,7 +73,7 @@ class _ImageGenerationScreenState extends State<ImageGenerationScreen> {
                 ),
                 style: TextStyle(color: Colors.white),
               )),
-          SizedBox(height: 10,),
+          SizedBox(height: 10*ScaleUtils.verticalScale,),
           Center(
             child: InkWell(
               onTap: () async {
@@ -95,20 +97,20 @@ class _ImageGenerationScreenState extends State<ImageGenerationScreen> {
               child: Container(
                   decoration: BoxDecoration(
                     color: AppColors.appThemeColor,
-                    borderRadius: BorderRadius.circular(20),
+                    borderRadius: BorderRadius.circular(20*ScaleUtils.scaleFactor),
                   ),
                   child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 12.0, horizontal: 18),
+                    padding:  EdgeInsets.symmetric(
+                        vertical: 10*ScaleUtils.verticalScale, horizontal: 16*ScaleUtils.horizontalScale),
                     child: Text("Generate Image",
-                        style: TextStyle(fontSize: 18, color: Colors.white)),
+                        style: TextStyle(fontSize: 18*ScaleUtils.scaleFactor, color: Colors.white)),
                   )),
             ),
           ),
-          SizedBox(height: 20,),
+          SizedBox(height: 20*ScaleUtils.verticalScale,),
           (isLoading)
               ? Padding(
-                  padding: const EdgeInsets.all(18.0),
+                  padding:  EdgeInsets.all(18.0*ScaleUtils.scaleFactor),
                   child: Container(
                     child: Lottie.asset('assets/Imagegeneration.json',
                         fit: BoxFit.cover),
@@ -116,17 +118,17 @@ class _ImageGenerationScreenState extends State<ImageGenerationScreen> {
                 )
               : (generatedImageurl != "")
                   ? Padding(
-                      padding: const EdgeInsets.fromLTRB(18.0, 0, 18, 8),
+                      padding: EdgeInsets.fromLTRB(18.0*ScaleUtils.horizontalScale, 0, 18*ScaleUtils.horizontalScale, 8*ScaleUtils.verticalScale),
                       child: SizedBox(
-                          height: 500,
-                          width: 500,
+                          height: 470*ScaleUtils.verticalScale,
+                          width: 470*ScaleUtils.horizontalScale,
                           child: Image.network(
                             generatedImageurl,
                             loadingBuilder: (BuildContext context, Widget image,
                                 ImageChunkEvent? loadingProgress) {
                               if (loadingProgress == null) return image;
                               return Padding(
-                                padding: const EdgeInsets.all(18.0),
+                                padding:  EdgeInsets.all(18.0*ScaleUtils.scaleFactor),
                                 child: Center(
                                   child: Container(
                                     child: Lottie.asset(
@@ -139,7 +141,7 @@ class _ImageGenerationScreenState extends State<ImageGenerationScreen> {
                           )),
                     )
                   : Padding(
-                      padding: const EdgeInsets.all(18.0),
+                      padding:  EdgeInsets.all(18.0*ScaleUtils.scaleFactor),
                       child: Container(
                         child: Lottie.asset('assets/brainsplash.json',
                             fit: BoxFit.cover),
@@ -157,17 +159,17 @@ class _ImageGenerationScreenState extends State<ImageGenerationScreen> {
                   child: Container(
                       decoration: BoxDecoration(
                         color: AppColors.appThemeColor,
-                        borderRadius: BorderRadius.circular(20),
+                        borderRadius: BorderRadius.circular(18*ScaleUtils.scaleFactor),
                       ),
                       child: Padding(
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 12.0, horizontal: 18),
+                        padding:  EdgeInsets.symmetric(
+                            vertical: 10.0*ScaleUtils.verticalScale, horizontal: 16*ScaleUtils.horizontalScale),
                         child: Row(
-                          children: const [
+                          children:  [
                             Text("Share",
                                 style:
-                                    TextStyle(fontSize: 18, color: Colors.white)),
-                            SizedBox(width: 10,),
+                                    TextStyle(fontSize: 17*ScaleUtils.scaleFactor, color: Colors.white)),
+                            SizedBox(width: 8*ScaleUtils.horizontalScale,),
                             Icon(Icons.share,color: Colors.white,)
                           ],
                         ),
@@ -180,17 +182,17 @@ class _ImageGenerationScreenState extends State<ImageGenerationScreen> {
                   child: Container(
                       decoration: BoxDecoration(
                         color: AppColors.appThemeColor,
-                        borderRadius: BorderRadius.circular(20),
+                        borderRadius: BorderRadius.circular(18*ScaleUtils.scaleFactor),
                       ),
                       child: Padding(
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 12.0, horizontal: 18),
+                        padding:  EdgeInsets.symmetric(
+                            vertical: 10*ScaleUtils.verticalScale, horizontal: 16*ScaleUtils.horizontalScale),
                         child: Row(
-                          children: const [
+                          children: [
                             Text("Download",
                                 style:
-                                    TextStyle(fontSize: 18, color: Colors.white)),
-                            SizedBox(width: 10,),
+                                    TextStyle(fontSize: 17*ScaleUtils.scaleFactor, color: Colors.white)),
+                            SizedBox(width: 8*ScaleUtils.horizontalScale,),
                             Icon(Icons.download_rounded,color: Colors.white,)
                           ],
                         ),
@@ -198,7 +200,8 @@ class _ImageGenerationScreenState extends State<ImageGenerationScreen> {
                 ),
               ],
             ),
-          ): Container()
+          ): Container(),
+          SizedBox(height: 20*ScaleUtils.verticalScale,)
         ],
       ),
     );

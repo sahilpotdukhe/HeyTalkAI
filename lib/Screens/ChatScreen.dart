@@ -6,6 +6,7 @@ import 'package:heytalkai/Provider/ChatProvider.dart';
 import 'package:heytalkai/Provider/ModelsProvider.dart';
 import 'package:heytalkai/Services/Services.dart';
 import 'package:heytalkai/Utilities/Constants.dart';
+import 'package:heytalkai/Utilities/ScreenDimensions.dart';
 import 'package:heytalkai/Widgets/ChatWidgets.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
@@ -30,6 +31,7 @@ class _ChatScreenState extends State<ChatScreen> {
 
   @override
   Widget build(BuildContext context) {
+    ScaleUtils.init(context);
     final modelsProvider = Provider.of<ModelsProvider>(context);
     final chatProvider = Provider.of<ChatProvider>(context);
     return Scaffold(
@@ -74,10 +76,10 @@ class _ChatScreenState extends State<ChatScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
-                  padding: EdgeInsets.all(8.0),
+                  padding: EdgeInsets.all(8.0*ScaleUtils.scaleFactor),
                   child: Container(
-                    height: 50,
-                    width: 50,
+                    height: 50*ScaleUtils.verticalScale,
+                    width: 50*ScaleUtils.scaleFactor,
                     decoration:
                     BoxDecoration(color: Colors.white, shape: BoxShape.circle),
                     child: Lottie.asset('assets/chattingavatarbot.json'),
@@ -85,19 +87,19 @@ class _ChatScreenState extends State<ChatScreen> {
               Column(
                 children: [
                   SizedBox(
-                    height: 20,
+                    height: 20*ScaleUtils.verticalScale,
                   ),
                   Container(
                     constraints: BoxConstraints(
-                        maxWidth: MediaQuery.of(context).size.width * 0.7),
+                        maxWidth: ScaleUtils.width*0.7),
                     decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.only(
-                            topRight: Radius.circular(5),
-                            bottomRight: Radius.circular(5),
-                            bottomLeft: Radius.circular(15))),
+                            topRight: Radius.circular(5*ScaleUtils.scaleFactor),
+                            bottomRight: Radius.circular(5*ScaleUtils.scaleFactor),
+                            bottomLeft: Radius.circular(15*ScaleUtils.scaleFactor))),
                     child: Padding(
-                      padding: EdgeInsets.fromLTRB(8, 10, 8, 10),
+                      padding: EdgeInsets.fromLTRB(8*ScaleUtils.horizontalScale, 10*ScaleUtils.verticalScale, 8*ScaleUtils.horizontalScale, 10*ScaleUtils.verticalScale),
                       child:Text('Please wait...')
                       // AnimatedTextKit(
                       //   animatedTexts: [
@@ -115,16 +117,16 @@ class _ChatScreenState extends State<ChatScreen> {
             ],
           ):Container(),
           Padding(
-            padding: const EdgeInsets.all(18.0),
+            padding: EdgeInsets.all(18.0*ScaleUtils.scaleFactor),
             child: TextField(
               controller: textController,
               decoration: InputDecoration(
                   hintText: 'Message HeyTalkAI..',
-                  hintStyle: TextStyle(fontSize: 16, color: Colors.white),
+                  hintStyle: TextStyle(fontSize: 14*ScaleUtils.scaleFactor, color: Colors.white),
                   labelText: 'Type your message',
                   floatingLabelStyle:
-                      TextStyle(fontSize: 18, color: Colors.white),
-                  labelStyle: TextStyle(fontSize: 16, color: Colors.white),
+                      TextStyle(fontSize: 16*ScaleUtils.scaleFactor, color: Colors.white),
+                  labelStyle: TextStyle(fontSize: 14*ScaleUtils.scaleFactor, color: Colors.white),
                   focusedBorder: OutlineInputBorder(
                       borderSide: BorderSide(color: Colors.white, width: 1)),
                   enabledBorder: OutlineInputBorder(

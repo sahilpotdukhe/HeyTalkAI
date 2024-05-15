@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:heytalkai/Models/OnBoardModel.dart';
 import 'package:heytalkai/Screens/HomeScreen.dart';
 import 'package:heytalkai/Utilities/Constants.dart';
+import 'package:heytalkai/Utilities/ScreenDimensions.dart';
 import 'package:lottie/lottie.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -53,6 +54,7 @@ class _OnBoardScreensState extends State<OnBoardScreens> {
   ];
   @override
   Widget build(BuildContext context) {
+    ScaleUtils.init(context);
     return Scaffold(
       backgroundColor: (currentIndex%2 ==0 )?Colors.black: Colors.white,
       appBar: AppBar(
@@ -66,7 +68,7 @@ class _OnBoardScreensState extends State<OnBoardScreens> {
               },
               child: Text("Skip",
                 style: TextStyle(
-                  fontSize: 20.0,
+                  fontSize: 20.0*ScaleUtils.scaleFactor,
                   fontWeight: FontWeight.bold,
                   fontFamily: 'Poppins',
                   color: AppColors.appThemeColor,
@@ -75,7 +77,7 @@ class _OnBoardScreensState extends State<OnBoardScreens> {
         ],
       ),
       body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 20),
+        padding: EdgeInsets.symmetric(horizontal: 20*ScaleUtils.horizontalScale),
         child: PageView.builder(
             itemCount: screens.length,
             controller: _pageController,
@@ -95,7 +97,7 @@ class _OnBoardScreensState extends State<OnBoardScreens> {
                     screens[index].text,
                     textAlign: TextAlign.center,
                     style: TextStyle(
-                      fontSize: 27.0,
+                      fontSize: 27.0*ScaleUtils.scaleFactor,
                       fontWeight: FontWeight.bold,
                       fontFamily: 'Poppins',
                       color: index % 2 == 0 ? Colors.white : Colors.black,
@@ -105,13 +107,13 @@ class _OnBoardScreensState extends State<OnBoardScreens> {
                     screens[index].description,
                     textAlign: TextAlign.center,
                     style: TextStyle(
-                      fontSize: 18.0,
+                      fontSize: 17.0*ScaleUtils.scaleFactor,
                       fontFamily: 'Montserrat',
                       color: index % 2 == 0 ? Colors.white : Colors.black,
                     ),
                   ),
                   SizedBox(
-                    height: 10,
+                    height: 10*ScaleUtils.verticalScale,
                     child: ListView.builder(
                       itemCount: screens.length,
                       shrinkWrap: true,
@@ -121,12 +123,12 @@ class _OnBoardScreensState extends State<OnBoardScreens> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Container(
-                              margin: EdgeInsets.symmetric(horizontal: 3),
-                              width: currentIndex == index ?25 : 8,
+                              margin: EdgeInsets.symmetric(horizontal: 3*ScaleUtils.horizontalScale),
+                              width: currentIndex == index ?25*ScaleUtils.horizontalScale : 8*ScaleUtils.horizontalScale,
                               height: 8,
                               decoration: BoxDecoration(
                                   color: currentIndex == index && currentIndex % 2 ==0 ? AppColors.appThemeColor: Colors.green[200],
-                                  borderRadius: BorderRadius.circular(10)
+                                  borderRadius: BorderRadius.circular(10*ScaleUtils.scaleFactor)
                               ),
                             )
                           ],
@@ -143,7 +145,7 @@ class _OnBoardScreensState extends State<OnBoardScreens> {
                       _pageController.nextPage(duration: Duration(microseconds: 500), curve: Curves.bounceIn);
                     },
                     child: Container(
-                      padding: EdgeInsets.symmetric(horizontal: 30,vertical: 10),
+                      padding: EdgeInsets.symmetric(horizontal: 30*ScaleUtils.horizontalScale,vertical: 10*ScaleUtils.verticalScale),
                       decoration: BoxDecoration(
                         color: index % 2 == 0 ? AppColors.appThemeColor : Colors.black,
                         borderRadius: BorderRadius.circular(15),
@@ -153,11 +155,11 @@ class _OnBoardScreensState extends State<OnBoardScreens> {
                         children:  [
                           Text((index == screens.length -1 )?"Finish":"Next",
                           style: TextStyle(
-                            fontSize: 16.0,
+                            fontSize: 16.0*ScaleUtils.scaleFactor,
                             color: Colors.white ,
                           ),
                           ),
-                          SizedBox(width: 15,),
+                          SizedBox(width: 15*ScaleUtils.horizontalScale,),
                           Icon(Icons.arrow_forward_sharp,color: Colors.white ),
                         ],
                       ),

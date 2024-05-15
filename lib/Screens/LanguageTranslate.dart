@@ -7,6 +7,7 @@ import 'package:hexcolor/hexcolor.dart';
 import 'package:heytalkai/Provider/LanguageProvider.dart';
 import 'package:heytalkai/Services/ApiService.dart';
 import 'package:heytalkai/Utilities/Constants.dart';
+import 'package:heytalkai/Utilities/ScreenDimensions.dart';
 import 'package:heytalkai/Widgets/LanguageBottomSheet.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
@@ -25,6 +26,7 @@ class _LanguageTranslateState extends State<LanguageTranslate> {
 
   @override
   Widget build(BuildContext context) {
+    ScaleUtils.init(context);
     final languageProvider = Provider.of<LanguageProvider>(context);
     return Scaffold(
       backgroundColor: Colors.white,
@@ -40,7 +42,7 @@ class _LanguageTranslateState extends State<LanguageTranslate> {
       body: ListView(
         children: [
           SizedBox(
-            height: 20,
+            height: 20*ScaleUtils.verticalScale,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -55,15 +57,15 @@ class _LanguageTranslateState extends State<LanguageTranslate> {
                   );
                 },
                 child: Container(
-                    height: 50,
-                    width: 180,
+                    height: 50*ScaleUtils.verticalScale,
+                    width: 160*ScaleUtils.horizontalScale,
                     alignment: Alignment.center,
                     decoration: BoxDecoration(
                       color: HexColor('F7F2F9'),
                       border: Border.all(color: AppColors.appThemeColor,width: 3),
-                      borderRadius: BorderRadius.all(Radius.circular(20)),
+                      borderRadius: BorderRadius.all(Radius.circular(18*ScaleUtils.scaleFactor)),
                     ),
-                    child: Text(languageProvider.getFromSelectedLanguage,style: TextStyle(fontSize: 18),)),
+                    child: Text(languageProvider.getFromSelectedLanguage,style: TextStyle(fontSize: 16*ScaleUtils.scaleFactor),)),
               ),
               IconButton(onPressed: () {}, icon: Icon(CupertinoIcons.repeat, color: Colors.black,)),
               InkWell(
@@ -76,25 +78,25 @@ class _LanguageTranslateState extends State<LanguageTranslate> {
                   );
                 },
                 child: Container(
-                    height: 50,
-                    width: 180,
+                    height: 50*ScaleUtils.verticalScale,
+                    width: 160*ScaleUtils.horizontalScale,
                     alignment: Alignment.center,
                     decoration: BoxDecoration(
                       color: HexColor('F7F2F9'),
                       border: Border.all(color: AppColors.appThemeColor,width: 3),
-                      borderRadius: BorderRadius.all(Radius.circular(20)),
+                      borderRadius: BorderRadius.all(Radius.circular(18*ScaleUtils.scaleFactor)),
                     ),
-                    child: Text(languageProvider.getToSelectedLanguage,style: TextStyle(fontSize: 18),)),
+                    child: Text(languageProvider.getToSelectedLanguage,style: TextStyle(fontSize: 16*ScaleUtils.scaleFactor),)),
               ),
             ],
           ),
           Padding(
-            padding: const EdgeInsets.all(20),
+            padding:  EdgeInsets.all(20*ScaleUtils.scaleFactor),
             child: Card(
               elevation: 30,
               child: Container(
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20),
+                  borderRadius: BorderRadius.circular(20*ScaleUtils.scaleFactor),
                   color: HexColor('F7F2F9'),
                 ),
                 child: TextField(
@@ -124,16 +126,16 @@ class _LanguageTranslateState extends State<LanguageTranslate> {
                     builder: (BuildContext context) {
                       return Center(
                         child: Container(
-                          width: 300,
-                          height: 300,
+                          width: 300*ScaleUtils.horizontalScale,
+                          height: 300*ScaleUtils.verticalScale,
                           color: Colors.transparent,
                           child: Column(
                             children: [
                               Lottie.asset('assets/chattingavatarbot.json',
-                                  height: 250, width: 250),
+                                  height: 250*ScaleUtils.verticalScale, width: 250*ScaleUtils.horizontalScale),
                               DefaultTextStyle(
                                   style: TextStyle(
-                                      fontSize: 18, color: Colors.white),
+                                      fontSize: 18*ScaleUtils.scaleFactor, color: Colors.white),
                                   child: Text('Translating Text...'))
                             ],
                           ),
@@ -149,24 +151,24 @@ class _LanguageTranslateState extends State<LanguageTranslate> {
               child: Container(
                   decoration: BoxDecoration(
                     color: AppColors.appThemeColor,
-                    borderRadius: BorderRadius.circular(20),
+                    borderRadius: BorderRadius.circular(18*ScaleUtils.scaleFactor),
                   ),
                   child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 12.0, horizontal: 18),
+                    padding:  EdgeInsets.symmetric(
+                        vertical: 10.0*ScaleUtils.verticalScale, horizontal: 16*ScaleUtils.horizontalScale),
                     child: Text("Translate",
                         style:
-                        TextStyle(fontSize: 18, color: Colors.white)),
+                        TextStyle(fontSize: 18*ScaleUtils.scaleFactor, color: Colors.white)),
                   )),
             ),
           ),
           Padding(
-            padding: const EdgeInsets.all(20),
+            padding: EdgeInsets.all(20*ScaleUtils.scaleFactor),
             child: Card(
               elevation: 30,
               child: Container(
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20),
+                  borderRadius: BorderRadius.circular(20*ScaleUtils.scaleFactor),
                   color: HexColor('F7F2F9'),
                 ),
                 child: TextField(
@@ -184,7 +186,7 @@ class _LanguageTranslateState extends State<LanguageTranslate> {
               ),
             ),
           ),
-          SizedBox(height: 30,),
+          SizedBox(height: 30*ScaleUtils.verticalScale,),
           Center(
             child: InkWell(
               onTap: () async{
@@ -195,17 +197,18 @@ class _LanguageTranslateState extends State<LanguageTranslate> {
               child: Container(
                   decoration: BoxDecoration(
                     color: Colors.red,
-                    borderRadius: BorderRadius.circular(20),
+                    borderRadius: BorderRadius.circular(18*ScaleUtils.scaleFactor),
                   ),
                   child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 12.0, horizontal: 28),
+                    padding: EdgeInsets.symmetric(
+                        vertical: 10*ScaleUtils.verticalScale, horizontal: 20*ScaleUtils.horizontalScale),
                     child: Text("Clear",
                         style:
-                        TextStyle(fontSize: 18, color: Colors.white)),
+                        TextStyle(fontSize: 18*ScaleUtils.scaleFactor, color: Colors.white)),
                   )),
             ),
           ),
+          SizedBox(height: 20*ScaleUtils.verticalScale,)
         ],
       ),
     );
