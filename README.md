@@ -11,6 +11,9 @@ This project involves the design and implementation of a cross-platform AI appli
 
 ---
 ### 🎥 Simple demo
+<p align="center">
+  <img src="HeyTalkAIdemo.gif" alt="EchatDemo" width="350" />
+</p>
 
 ---
 ## ➤ Key Features
